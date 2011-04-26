@@ -23,7 +23,7 @@ class Conect
 	
 	/**
 	 * URL da requisição
-	 * @var unknown_type
+	 * @var String
 	 */
 	private $url;
 	
@@ -48,7 +48,8 @@ class Conect
 	{
 		$this->email = $email;
 		$this->senha = $senha;
-		$this->initCurl($url);
+		$this->url = $url;
+		$this->initCurl($this->url);
 		
 	}
 
@@ -89,8 +90,13 @@ class Conect
 		curl_setopt($this->ch, CURLOPT_POSTFIELDS, $fields);
 	}
 	
+	/**
+	 * Define a URL da requisição
+	 * @param unknown_type $url
+	 */
 	function setURL($url)
 	{
+		$this->url = $url;
 		curl_setopt($this->ch, CURLOPT_URL, $url);
 	}
 	/**

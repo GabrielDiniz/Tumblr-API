@@ -22,6 +22,12 @@ class Conect
 	private $senha;
 	
 	/**
+	 * URL da requisição
+	 * @var unknown_type
+	 */
+	private $url;
+	
+	/**
 	 * Handler para usar a libCurl
 	 * @var CurlHandler
 	 */

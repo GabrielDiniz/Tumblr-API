@@ -44,7 +44,7 @@ class Conect
 	 * @param String $email
 	 * @param String $senha
 	 */
-	function Conect($email,$senha,$url=false) 
+	function Conect($email = false, $senha = false, $url = false) 
 	{
 		$this->email = $email;
 		$this->senha = $senha;

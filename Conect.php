@@ -116,6 +116,24 @@ class Conect
 	{
 		return curl_getinfo($this->ch, CURLINFO_HTTP_CODE);
 	}
+
+	/**
+	 * @param String $email
+	 */
+	function setEmail($email) {
+		$this->email = $email;
+	}
+	
+	/**
+	 * @param String $senha
+	 */
+	function setSenha($senha) {
+		$this->senha = $senha;
+	}
+	
+	function getUrl() {
+		return $this->url;
+	}
 }
 
 

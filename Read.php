@@ -15,7 +15,7 @@ class Read extends Conect
 	private $blog;
 
 	/**
-	 * funcao da API a ser usada
+	 * Funcao da API a ser usada
 	 * @var String
 	 */
 	private $function;
@@ -25,7 +25,28 @@ class Read extends Conect
 	 * @var Boolean
 	 */
 	private $authenticated;
+	
+	/**
+	 * Registro inicial a ser buscado
+	 * @var Integer
+	 */
+	private $start;
 
+	/**
+	 * Número de regidtros a ser buscado
+	 * @var unknown_type
+	 */
+	private $num;
+	
+	/**
+	 * Array com os campos a serem enviados vis POST
+	 * @var Array()
+	 */
+	private $fields;
+	/**
+	 * @param String $blog
+	 * @param String $function
+	 */
 	function Read($blog,$function)
 	{
 		parent::Conect();
@@ -43,10 +64,32 @@ class Read extends Conect
 				$this->blog = 'www';
 			}
 
-			$this->setURL($this->blog.".tumblr.com/api/".$function);
+			
 		}
+		$this->setURL($this->blog.".tumblr.com/api/".$function);
 	}
 
+	function credenciais($email,$senha) {
+		$this->setEmail($email);
+		$this->setSenha($senha);
+	}
+	
+	
+	function exec(){
+		if ($this->authenticated) {
+			$this->setPostFields($this->fields);
+			return simplexml_load_string(parent::exec());			
+		}
+		else {
+			
+			return simplexml_load_file($this->getUrl()."?".http_build_query($this->fields));
+		}
+	}
+	
+	function setField($field, $value) {
+		$this->fields[$field] = $value;
+	}
+	
 }
 
 

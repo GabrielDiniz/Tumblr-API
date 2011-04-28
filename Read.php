@@ -1,5 +1,5 @@
 <?php
-
+require_once('Conect.php');
 
 /**
  * @author gabriel
@@ -52,7 +52,7 @@ class Read extends Conect
 		parent::Conect();
 		$this->blog = $blog;
 		$this->function = $function;
-
+		$this->authenticated = 0;
 		if (in_array($this->function, array('dashboard','likes','read-authenticated'))) {
 			$this->setPost(true);
 			$this->authenticated = true;
@@ -63,8 +63,6 @@ class Read extends Conect
 			if ($this->function === 'dashboard') {
 				$this->blog = 'www';
 			}
-
-			
 		}
 		$this->setURL($this->blog.".tumblr.com/api/".$function);
 	}
@@ -82,7 +80,7 @@ class Read extends Conect
 		}
 		else {
 			
-			return simplexml_load_file($this->getUrl()."?".http_build_query($this->fields));
+			return simplexml_load_file('http://'.$this->getUrl()."?".http_build_query($this->fields));
 		}
 	}
 	
